@@ -2,29 +2,21 @@ package com.yousef.moviesapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yousef.moviesapp.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
+    private val myAdapter by lazy { MyAdapter(getMoviesList()) }
     private lateinit var binding: ActivityHomeBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-// change status bar color
-        window.statusBarColor = resources.getColor(R.color.primary)
-
-// get name from first screen and set it in ui
-        val userName: String? = intent.getStringExtra(Constant.name)
-        val nameElement: TextView = findViewById(R.id.userName)
-        nameElement.text = userName
-
-// recycle view settings
-        val recyclerView = findViewById<RecyclerView>(R.id.rv_movies)
-        val moviesList: List<Movie> = listOf(
+    private fun getMoviesList(): List<Movie> {
+        return listOf(
             Movie(
                 "Inception",
                 "A mind-bending thriller about dreams within dreams.",
@@ -87,12 +79,92 @@ class HomeActivity : AppCompatActivity() {
                 "24/03/1972"
             )
         )
+    }
+
+    private fun getNewMovies(): List<Movie> {
+        return listOf<Movie>(
+            Movie(
+                "The Matrix",
+                "A computer hacker learns about the true nature of his reality and his role in the war against its controllers.",
+                8.7,
+                R.drawable.f,
+                "31/03/1999"
+            ),
+            Movie(
+                "Fight Club",
+                "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into something much, much more.",
+                8.8,
+                R.drawable.g,
+                "15/10/1999"
+            ),
+            Movie(
+                "Pulp Fiction",
+                "The lives of two mob hitmen, a boxer, a gangster, and his wife intertwine in a series of stories involving violence and redemption.",
+                8.9,
+                R.drawable.h,
+                "14/10/1994"
+            ),
+            Movie(
+                "The Lord of the Rings: The Return of the King",
+                "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
+                9.0,
+                R.drawable.l,
+                "17/12/2003"
+            ),
+            Movie(
+                "Star Wars: Episode V - The Empire Strikes Back",
+                "After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Yoda.",
+                8.7,
+                R.drawable.m,
+                "21/05/1980"
+            )
+        )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+// change status bar color
+        window.statusBarColor = resources.getColor(R.color.primary)
+
+//      Setup side menu
+        setSupportActionBar(findViewById(R.id.toolbar))
+
+
+// get name from first screen and set it in ui
+        val userName: String? = intent.getStringExtra(Constant.name)
+        val nameElement: TextView = findViewById(R.id.userName)
+        nameElement.text = userName
+
+// recycle view settings
+        val recyclerView = findViewById<RecyclerView>(R.id.rv_movies)
         recyclerView.layoutManager = LinearLayoutManager(this)
-
-
-        val adapter = MyAdapter(moviesList)
+        val adapter = MyAdapter(getMoviesList())
         recyclerView.adapter = adapter
 
 
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                Log.d("momo", myAdapter.itemCount.toString())
+                myAdapter.updateList(getNewMovies())
+                Log.d("momo", myAdapter.itemCount.toString())
+                Toast.makeText(this, "${getNewMovies().size} Movies added", Toast.LENGTH_SHORT)
+                    .show()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+
 }

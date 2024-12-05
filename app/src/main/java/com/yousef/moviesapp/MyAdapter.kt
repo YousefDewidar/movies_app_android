@@ -1,13 +1,17 @@
 package com.yousef.moviesapp
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DiffUtil.DiffResult
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.math.log
 
-class MyAdapter(private val items: List<Movie>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class MyAdapter(private var items: List<Movie>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
 
     //  بعرف الadapter ان انا هشتغل علي movie_item وببعته ل my view holder عشان يتسخرج العناصر اللي جواه
@@ -36,6 +40,14 @@ class MyAdapter(private val items: List<Movie>) : RecyclerView.Adapter<MyAdapter
         holder.date.text = items[position].date
         holder.description.text = items[position].desc
         holder.image.setImageResource(items[position].img)
+    }
+
+
+    fun updateList(newList: List<Movie>) {
+        val myDiffUtil = MyDiffUtil(oldList = this.items, newList = newList)
+        val difResult: DiffResult = DiffUtil.calculateDiff(myDiffUtil)
+        this.items = newList
+        difResult.dispatchUpdatesTo(this)
 
     }
 }

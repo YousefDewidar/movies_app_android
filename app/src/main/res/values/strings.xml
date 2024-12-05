@@ -10,4 +10,6 @@
     <string name="_0_8">(0.8)</string>
     <string name="this_is_a_short_description_of_the_movie">This is a short description of the movie.</string>
     <string name="_2024_01_01">2024-01-01</string>
+    <string name="password_must_be_at_least_8_characters_long">* Password must be at least 8 characters long</string>
+    <string name="password_must_contain_numbers_and_characters">* Password must contain numbers and characters</string>
 </resources>

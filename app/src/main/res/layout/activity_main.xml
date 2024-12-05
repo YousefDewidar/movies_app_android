@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
         android:background="@android:drawable/edit_text"
         android:backgroundTint="@android:color/white"
@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
         android:background="@android:drawable/edit_text"
         android:backgroundTint="@android:color/white"
@@ -83,4 +83,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/pass_validate_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/password_must_be_at_least_8_characters_long"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPass" />
+
+    <TextView
+        android:id="@+id/pass_validate_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/password_must_contain_numbers_and_characters"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPass" />
 </androidx.constraintlayout.widget.ConstraintLayout>
