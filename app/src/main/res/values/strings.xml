@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Movies App</string>
+    <string name="img_desc">Todo</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="hint_name">Enter your name</string>
+    <string name="hint_password">Password</string>
+    <string name="more">More</string>
+    <string name="welcome">Welcome,</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="_0_8">(0.8)</string>
+    <string name="this_is_a_short_description_of_the_movie">This is a short description of the movie.</string>
+    <string name="_2024_01_01">2024-01-01</string>
+</resources>
